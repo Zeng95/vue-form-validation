@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Form Validation</title>
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <script src="https://unpkg.com/vuelidate@0.7.4/dist/vuelidate.min.js"></script>
+  <script src="https://unpkg.com/vuelidate@0.7.4/dist/validators.min.js"></script>
+</head>
+
+<body>
+  <div id="app">
+    <h1>Form Validation</h1>
+
+    <form @submit.prevent="submitForm($v)">
+      <div class="form-group">
+        <label for="name">Name:</label>
+        <input type="text" id="name" v-model.tirm="$v.form.name.$model" placeholder="Please enter your name">
+        <p v-if="!$v.form.name.required" class="error-message">The name field is required</p>
+      </div>
+
+      <div class="form-group">
+        <label for="age">Age:</label>
+        <input type="number" id="age" v-model.number="form.age" placeholder="Please enter your age">
+        <p v-if="!$v.form.age.required" class="error-message">The age field is required</p>
+        <p v-if="!$v.form.age.between" class="error-message">The age field must between 12 and 120</p>
+      </div>
+
+      <div style="text-align: center;">
+        <button class="btn-submit">Submit</button>
+      </div>
+    </form>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+
+</html>
