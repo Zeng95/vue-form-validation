@@ -17,9 +17,9 @@
     <h1>Form Validation</h1>
 
     <form @submit.prevent="submitForm($v)">
-      <div class="form-group">
-        <label for="name">Name:</label>
-        <input type="text" id="name" v-model.tirm="$v.form.name.$model" placeholder="Please enter your name">
+      <div class="form-group" :class="{ 'form-group--error': $v.form.name.$error }">
+        <label class="form__label" for="name">Name:</label>
+        <input class="form__input" type="text" id="name" v-model.tirm="$v.form.name.$model" placeholder="Please enter your name">
         <div v-if="$v.form.name.$error">
           <p v-if="!$v.form.name.required" class="error-message">The name field is required</p>
           <p v-else-if="!$v.form.name.minLength" class="error-message">The name field must between at least 3 letters
@@ -27,9 +27,9 @@
         </div>
       </div>
 
-      <div class="form-group">
-        <label for="age">Age:</label>
-        <input type="number" id="age" v-model.number="$v.form.age.$model" placeholder="Please enter your age">
+      <div class="form-group" :class="{ 'form-group--error': $v.form.age.$error }">
+        <label class="form__label" for="age">Age:</label>
+        <input class="form__input" type="number" id="age" v-model.number="$v.form.age.$model" placeholder="Please enter your age">
         <div v-if="$v.form.age.$error">
           <p v-if="!$v.form.age.required" class="error-message">The age field is required</p>
           <p v-else-if="!$v.form.age.integer" class="error-message">The age field should be an
