@@ -3,3 +3,4 @@
 2. Ideally, we would display an error message for each input individually.
 3. Computed properties are reactive.
 4. re-inventing the wheel.
+5. The $dirty property represents if a model has been touched.

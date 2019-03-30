@@ -1,5 +1,5 @@
 Vue.use(window.vuelidate.default)
-const { required, between, minLength } = window.validators
+const { required, minLength, integer, between } = window.validators
 
 new Vue({
   el: '#app',
@@ -19,6 +19,7 @@ new Vue({
       },
       age: {
         required,
+        integer,
         between: between(12, 120)
       }
     }

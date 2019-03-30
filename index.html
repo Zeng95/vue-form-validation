@@ -20,15 +20,23 @@
       <div class="form-group">
         <label for="name">Name:</label>
         <input type="text" id="name" v-model.tirm="$v.form.name.$model" placeholder="Please enter your name">
-        <p v-if="!$v.form.name.required" class="error-message">The name field is required</p>
-        <p v-if="!$v.form.name.minLength" class="error-message">The name field must between at least 3 letters</p>
+        <div v-if="$v.form.name.$error">
+          <p v-if="!$v.form.name.required" class="error-message">The name field is required</p>
+          <p v-else-if="!$v.form.name.minLength" class="error-message">The name field must between at least 3 letters
+          </p>
+        </div>
       </div>
 
       <div class="form-group">
         <label for="age">Age:</label>
-        <input type="number" id="age" v-model.number="form.age" placeholder="Please enter your age">
-        <p v-if="!$v.form.age.required" class="error-message">The age field is required</p>
-        <p v-if="!$v.form.age.between" class="error-message">The age field must between 12 and 120</p>
+        <input type="number" id="age" v-model.number="$v.form.age.$model" placeholder="Please enter your age">
+        <div v-if="$v.form.age.$error">
+          <p v-if="!$v.form.age.required" class="error-message">The age field is required</p>
+          <p v-else-if="!$v.form.age.integer" class="error-message">The age field should be an
+            integer</p>
+          <p v-else-if="!$v.form.age.between" class="error-message">You should be at least 12 and
+            younger than 120 to continue</p>
+        </div>
       </div>
 
       <div style="text-align: center;">
