@@ -1,4 +1,5 @@
 Vue.use(window.vuelidate.default)
+
 const { required, minLength, integer, between } = window.validators
 
 new Vue({
@@ -27,9 +28,9 @@ new Vue({
 
   methods: {
     submitForm(validation) {
-      const { name, age } = validation.form
+      validation.form.$touch()
 
-      if (!name.$invalid && !age.$invalid) {
+      if (!validation.form.$invalid) {
         console.log('successful')
       } else {
         console.log('error')
