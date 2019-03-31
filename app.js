@@ -1,5 +1,6 @@
-Vue.use(window.vuelidate.default)
+import { shouldAppendErrorClass, shouldAppendValidClass } from './helpers.js'
 
+Vue.use(window.vuelidate.default)
 const { required, minLength, integer, between, email } = window.validators
 
 new Vue({
@@ -33,12 +34,16 @@ new Vue({
   },
 
   methods: {
-    nameIsValid (validation) {
-      validation.form.name.$touch()
+    shouldAppendErrorClass,
+
+    shouldAppendValidClass,
+
+    nameIsValid(validation) {
+      validation.name.$touch()
     },
 
-    ageIsValid (validation) {
-      validation.form.age.$touch()
+    ageIsValid(validation) {
+      validation.age.$touch()
     },
 
     submitForm(validation) {
