@@ -143,6 +143,10 @@ input[type=checkbox]:checked:before {
   border-color: #f79483;
 }
 
+.form-group--valid input, .form-group--valid input:focus, .form-group--valid input:hover {
+  border-color: #41B883;
+}
+
 @keyframes shakeError {
   0% {
     transform: translateX(0);

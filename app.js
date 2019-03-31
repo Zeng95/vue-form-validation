@@ -1,6 +1,6 @@
 Vue.use(window.vuelidate.default)
 
-const { required, minLength, integer, between } = window.validators
+const { required, minLength, integer, between, email } = window.validators
 
 new Vue({
   el: '#app',
@@ -8,7 +8,8 @@ new Vue({
   data: {
     form: {
       name: null,
-      age: null
+      age: null,
+      email: null
     }
   },
 
@@ -18,15 +19,28 @@ new Vue({
         required,
         minLength: minLength(3)
       },
+
       age: {
         required,
         integer,
         between: between(12, 120)
+      },
+
+      email: {
+        email
       }
     }
   },
 
   methods: {
+    nameIsValid (validation) {
+      validation.form.name.$touch()
+    },
+
+    ageIsValid (validation) {
+      validation.form.age.$touch()
+    },
+
     submitForm(validation) {
       validation.form.$touch()
 
