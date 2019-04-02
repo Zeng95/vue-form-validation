@@ -1,7 +1,8 @@
 import { shouldAppendErrorClass, shouldAppendValidClass } from './helpers.js'
 
 Vue.use(window.vuelidate.default)
-const { required, minLength, integer, between, email } = window.validators
+const { required, minLength, integer, between, email, helpers } = window.validators
+const pizzaOrBurger = value => value === 'pizza' || value === 'burger' || !helpers.req(value)
 
 new Vue({
   el: '#app',
@@ -10,7 +11,8 @@ new Vue({
     form: {
       name: null,
       age: null,
-      email: null
+      email: null,
+      food: null
     }
   },
 
@@ -29,6 +31,10 @@ new Vue({
 
       email: {
         email
+      },
+
+      food: {
+        pizzaOrBurger
       }
     }
   },

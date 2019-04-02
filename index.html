@@ -43,11 +43,22 @@
       <div class="form-group"
         :class="{ 'form-group--error': shouldAppendErrorClass($v.form.email), 'form-group--valid': shouldAppendValidClass($v.form.email) }">
         <label class="form__label" for="email">Email:</label>
-        <input class="form__input" type="email" id="email" v-model.number="form.email"
+        <input class="form__input" type="email" id="email" v-model="form.email"
           placeholder="Please enter your email address">
         <!-- <div v-if="$v.form.email.$error">
             <p v-if="!$v.form.age.required" class="error-message">The age field is required</p>
           </div> -->
+      </div>
+
+      <div class="form-group"
+        :class="{ 'form-group--error': shouldAppendErrorClass($v.form.food), 'form-group--valid': shouldAppendValidClass($v.form.food) }">
+        <label class="form__label" for="food">Pizza Or Burger:</label>
+        <input class="form__input" type="text" id="food" v-model="form.food" placeholder="Please enter your choice"
+          @blur="$v.form.food.$touch()">
+        <div v-if="$v.form.food.$error">
+          <p v-if="!$v.form.food.pizzaOrBurger" class="error-message">Sorry! We only serve pizza
+            and burgers</p>
+        </div>
       </div>
 
       <div>
