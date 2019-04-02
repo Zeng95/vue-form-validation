@@ -1,4 +1,5 @@
 function shouldAppendErrorClass(field) {
+  console.log(field)
   return field.$error
 }
 

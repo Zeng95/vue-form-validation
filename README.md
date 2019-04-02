@@ -7,3 +7,4 @@
 6. Use case for showing the errors on blur, is in email inputs.
 7. The validators have a single responsibility.
 8. If we didn't have set up the required validator, null would be a valid value.
+9. With conditional validation a rule applies to a field, only when a condition is met.

@@ -40,14 +40,19 @@
         </div>
       </div>
 
+      <div class="form-group">
+        <label for="newsletter">Subscribe to the newsletter:</label>
+        <input type="checkbox" id="newsletter" v-model="form.newsletter">
+      </div>
+
       <div class="form-group"
         :class="{ 'form-group--error': shouldAppendErrorClass($v.form.email), 'form-group--valid': shouldAppendValidClass($v.form.email) }">
         <label class="form__label" for="email">Email:</label>
         <input class="form__input" type="email" id="email" v-model="form.email"
-          placeholder="Please enter your email address">
-        <!-- <div v-if="$v.form.email.$error">
-            <p v-if="!$v.form.age.required" class="error-message">The age field is required</p>
-          </div> -->
+          placeholder="Please enter your email address" @blur="$v.form.email.$touch()">
+        <div v-if="$v.form.email.$error">
+          <p v-if="!$v.form.email.required" class="error-message">Email is required so we can send you the newsletter</p>
+        </div>
       </div>
 
       <div class="form-group"
