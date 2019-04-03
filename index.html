@@ -59,7 +59,7 @@
       <div class="form-group github-username"
         :class="{ 'form-group--error': shouldAppendErrorClass($v.form.githubUsername), 'form-group--valid': shouldAppendValidClass($v.form.githubUsername) }">
         <label class="form__label" for="github-username">GitHub username</label>
-        <input class="form__input" type="text" id="github-username" v-model.trim="$v.form.githubUsername.$model">
+        <input class="form__input" type="text" id="github-username" v-model.trim.lazy="$v.form.githubUsername.$model">
         <span v-show="$v.form.githubUsername.$pending" class="fa fa-spinner fa-spin"></span>
         <div v-if="$v.form.githubUsername.$error">
           <p v-if="!$v.form.githubUsername.exists" class="error-message">There is not GitHub user with this username
@@ -88,7 +88,7 @@
   <script src="https://unpkg.com/vuelidate@0.7.4/dist/vuelidate.min.js"></script>
   <script src="https://unpkg.com/vuelidate@0.7.4/dist/validators.min.js"></script>
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-  
+
   <script type="module" src="./app.js"></script>
 </body>
 

@@ -47,10 +47,7 @@ new Vue({
         exists(value) {
           if (value === '') return true
 
-          // simulate async call, fail for all logins with even length
-          return new Promise((resolve, reject) => {
-            setTimeout(() => reject(value.length > 3), 1000)
-          })
+          return axios.get(`//api.github.com/users/${value}`)
         }
       }
     }
