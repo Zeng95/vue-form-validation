@@ -1,3 +1,6 @@
+## Documentations
+1. <a href="https://medium.com/codingthesmartway-com-blog/getting-started-with-axios-166cb0035237?token=58t9p7x7d6DxGQxT">Getting Started With Axios</a>
+
 ## Notes
 1. Even if there is only one input, it needs to somehow be validated, even if it's done through HTML.
 2. Ideally, we would display an error message for each input individually.
