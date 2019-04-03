@@ -18,7 +18,7 @@
         :class="{ 'form-group--error': shouldAppendErrorClass($v.form.name), 'form-group--valid': shouldAppendValidClass($v.form.name) }">
         <label class="form__label" for="name">Name:</label>
         <input class="form__input" type="text" id="name" v-model.tirm="form.name" placeholder="Please enter your name"
-          @blur="nameIsValid($v.form)">
+          @blur="isValid($v.form.name)">
         <div v-if="$v.form.name.$error">
           <p v-if="!$v.form.name.required" class="error-message">The name field is required</p>
           <p v-else-if="!$v.form.name.minLength" class="error-message">The name field must between at least 3 letters
@@ -30,7 +30,7 @@
         :class="{ 'form-group--error': shouldAppendErrorClass($v.form.age), 'form-group--valid': shouldAppendValidClass($v.form.age) }">
         <label class="form__label" for="age">Age:</label>
         <input class="form__input" type="number" id="age" v-model.number="form.age" placeholder="Please enter your age"
-          @blur="ageIsValid($v.form)">
+          @blur="isValid($v.form.age)">
         <div v-if="$v.form.age.$error">
           <p v-if="!$v.form.age.required" class="error-message">The age field is required</p>
           <p v-else-if="!$v.form.age.integer" class="error-message">The age field should be an
@@ -48,10 +48,22 @@
       <div class="form-group"
         :class="{ 'form-group--error': shouldAppendErrorClass($v.form.email), 'form-group--valid': shouldAppendValidClass($v.form.email) }">
         <label class="form__label" for="email">Email:</label>
-        <input class="form__input" type="email" id="email" v-model="form.email"
-          placeholder="Please enter your email address" @blur="$v.form.email.$touch()">
+        <input class="form__input" type="email" id="email" v-model.trim="form.email"
+          placeholder="Please enter your email address" @blur="isValid($v.form.email)">
         <div v-if="$v.form.email.$error">
-          <p v-if="!$v.form.email.required" class="error-message">Email is required so we can send you the newsletter</p>
+          <p v-if="!$v.form.email.required" class="error-message">Email is required so we can send you the newsletter
+          </p>
+        </div>
+      </div>
+
+      <div class="form-group github-username"
+        :class="{ 'form-group--error': shouldAppendErrorClass($v.form.githubUsername), 'form-group--valid': shouldAppendValidClass($v.form.githubUsername) }">
+        <label class="form__label" for="github-username">GitHub username</label>
+        <input class="form__input" type="text" id="github-username" v-model.trim="$v.form.githubUsername.$model">
+        <span v-show="$v.form.githubUsername.$pending" class="fa fa-spinner fa-spin"></span>
+        <div v-if="$v.form.githubUsername.$error">
+          <p v-if="!$v.form.githubUsername.exists" class="error-message">There is not GitHub user with this username
+          </p>
         </div>
       </div>
 
@@ -59,7 +71,7 @@
         :class="{ 'form-group--error': shouldAppendErrorClass($v.form.food), 'form-group--valid': shouldAppendValidClass($v.form.food) }">
         <label class="form__label" for="food">Pizza Or Burger:</label>
         <input class="form__input" type="text" id="food" v-model="form.food" placeholder="Please enter your choice"
-          @blur="$v.form.food.$touch()">
+          @blur="isValid($v.form.food)">
         <div v-if="$v.form.food.$error">
           <p v-if="!$v.form.food.pizzaOrBurger" class="error-message">Sorry! We only serve pizza
             and burgers</p>
@@ -75,6 +87,8 @@
   <script src="https://cdn.jsdelivr.net/npm/vue"></script>
   <script src="https://unpkg.com/vuelidate@0.7.4/dist/vuelidate.min.js"></script>
   <script src="https://unpkg.com/vuelidate@0.7.4/dist/validators.min.js"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  
   <script type="module" src="./app.js"></script>
 </body>
 

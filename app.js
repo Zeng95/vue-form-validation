@@ -2,7 +2,7 @@ import { shouldAppendErrorClass, shouldAppendValidClass } from './helpers.js'
 
 Vue.use(window.vuelidate.default)
 
-const { required, minLength, integer, between, email, helpers, requiredIf } = window.validators
+const { required, minLength, integer, between, email, requiredIf, helpers } = window.validators
 const pizzaOrBurger = value => value === 'pizza' || value === 'burger' || !helpers.req(value)
 
 new Vue({
@@ -10,11 +10,12 @@ new Vue({
 
   data: {
     form: {
-      name: null,
-      age: null,
+      name: '',
+      age: 0,
       email: null,
       food: null,
-      newsletter: null
+      newsletter: null,
+      githubUsername: ''
     }
   },
 
@@ -34,12 +35,23 @@ new Vue({
       email: {
         email,
         required: requiredIf(function () {
-          return this.form.newsletter
+          return !!this.form.newsletter
         })
       },
 
       food: {
         pizzaOrBurger
+      },
+
+      githubUsername: {
+        exists(value) {
+          if (value === '') return true
+
+          // simulate async call, fail for all logins with even length
+          return new Promise((resolve, reject) => {
+            setTimeout(() => reject(value.length > 3), 1000)
+          })
+        }
       }
     }
   },
@@ -49,12 +61,8 @@ new Vue({
 
     shouldAppendValidClass,
 
-    nameIsValid(validation) {
-      validation.name.$touch()
-    },
-
-    ageIsValid(validation) {
-      validation.age.$touch()
+    isValid(field) {
+      field.$touch()
     },
 
     submitForm(validation) {
